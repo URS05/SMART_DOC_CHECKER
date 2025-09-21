@@ -12,7 +12,13 @@ from pathlib import Path
 import chardet
 
 # Document processing imports
-from pdfminer.high_level import extract_text as pdf_extract_text
+try:
+    from pdfminer.high_level import extract_text as pdf_extract_text
+    HAS_PDFMINER = True
+except ImportError:
+    import PyPDF2
+    HAS_PDFMINER = False
+    
 from docx import Document
 from bs4 import BeautifulSoup
 
@@ -88,8 +94,17 @@ class DocumentExtractor:
     def _extract_pdf(self, file_path: Path) -> str:
         """Extract text from PDF file."""
         try:
-            text = pdf_extract_text(str(file_path))
-            return text
+            if HAS_PDFMINER:
+                text = pdf_extract_text(str(file_path))
+                return text
+            else:
+                # Fallback to PyPDF2
+                text_parts = []
+                with open(file_path, 'rb') as file:
+                    pdf_reader = PyPDF2.PdfReader(file)
+                    for page in pdf_reader.pages:
+                        text_parts.append(page.extract_text())
+                return '\n'.join(text_parts)
         except Exception as e:
             logger.error(f"Error extracting PDF text: {str(e)}")
             raise
