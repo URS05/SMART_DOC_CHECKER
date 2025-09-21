@@ -7,10 +7,23 @@
 > **AI-Powered Document Contradiction Detection System**  
 > Automatically detect contradictions and inconsistencies across multiple documents using state-of-the-art Natural Language Processing.
 
-## ⚡ One-Click Setup & Launch
+## ⚡ Quick Start Options
 
-**For Windows users, it's incredibly simple:**
+### 🌐 **Try Live Demo** (No Installation Required)
+> **Coming Soon!** Live demo will be available at: `https://your-app.streamlit.app`
 
+### 💻 **Local Installation**
+
+**Option 1: Simple Python Run**
+```bash
+git clone https://github.com/yourusername/smart-doc-checker.git
+cd smart-doc-checker
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+python -m streamlit run simple_app.py
+```
+
+**Option 2: Windows Batch File**
 1. **Download/Clone** this repository
 2. **Double-click** `LAUNCH_SMART_DOC_CHECKER.bat`  
 3. **That's it!** ✨

@@ -1,0 +1,12 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+healthcheckPath = "/_stcore/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+
+[env]
+PYTHONPATH = "/app"
+STREAMLIT_SERVER_HEADLESS = "true"
+STREAMLIT_SERVER_PORT = "8501"
